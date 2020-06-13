@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
-//import { useApp } from "../hooks";
+import { useApp } from "../hooks";
 import { setCookie } from "../helpers/utils";
 
 const useStyles = makeStyles(theme => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = () => {
   const classes = useStyles();
- // const { isLoggedIn, setIsLoggegIn, setToken } = useApp();
+  const { isLoggedIn, setIsLoggegIn, setToken } = useApp();
   return (
     <AppBar position="sticky" className={classes.root}>
       <Toolbar className={classes.toolbar}>
@@ -45,15 +45,15 @@ const Header = () => {
             height="60"
           />
         </Link>
-        {(
+        {isLoggedIn && (
           <Button
             color="inherit"
             className={classes.button}
-            // onClick={() => {
-            //   setIsLoggegIn(false);
-            //   setToken(null);
-            //   setCookie("token", null, -10);
-            // }}
+            onClick={() => {
+              setIsLoggegIn(false);
+              setToken(null);
+              setCookie("token", null, -20);
+            }}
           >
             Logout
           </Button>
